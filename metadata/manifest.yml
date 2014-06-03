@@ -6,9 +6,9 @@ Description: "Cassandra is a multi-user, multi-threaded NoSQL database server."
 Version: '2.0.8'
 Versions: ['1.2.5', '2.0.8']
 Cartridge-Version: 0.0.1
-Cartridge-Vendor: Juergen Hoffmann
+Cartridge-Vendor: hoffmann
 License: GPL
-Vendor: Juergen HB+offmann
+Vendor: Juergen Hoffmann
 Categories:
   - service
   - database
