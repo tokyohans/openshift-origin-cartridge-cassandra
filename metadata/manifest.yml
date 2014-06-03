@@ -1,11 +1,15 @@
 Name: cassandra
 Cartridge-Short-Name: CASSANDRA
 Architecture: noarch
-Display-Name: Cassandra Database 1.2.5
-Description: "Cassandra is a multi-user, multi-threaded NoSQL database server."
+Display-Name: Cassandra Database 2.0.8
+Description: "The Apache Cassandra database is the right choice when you need scalability and high availability without compromising performance. Linear scalability and proven fault-tolerance on commodity hardware or cloud infrastructure make it the perfect platform for mission-critical data. Cassandra's support for replicating across multiple datacenters is best-in-class, providing lower latency for your users and the peace of mind of knowing that you can survive regional outages."
 Version: '2.0.8'
-Versions: ['1.2.5', '2.0.8']
-Cartridge-Version: 0.0.1
+Versions:
+- '1.2.5'
+- '2.0.8'
+Cartridge-Version: 0.0.2
+Compatible-Versions:
+- 0.0.1
 Cartridge-Vendor: hoffmann
 License: GPL
 Vendor: Juergen Hoffmann
@@ -31,8 +35,8 @@ Cart-Data:
     Type: cart_data
     Description: "Cassandra DB connection URL"
 Provides:
+  - cassandra-2.0.8
   - cassandra 
-  - cassandra-singleton-master
 Publishes:
   publish-db-connection-info:
     Type: "ENV:NET_TCP:db:connection-info"
@@ -45,3 +49,9 @@ Endpoints:
     Private-Port:      19160
     Public-Port-Name:  DB_PROXY_PORT
 Install-Build-Required: false
+Version-Overrides:
+  '1.2.5':
+    Display-Name: Cassandra Database 1.2.5
+    Provides:
+    - cassandra-1.2.5
+    - cassandra
