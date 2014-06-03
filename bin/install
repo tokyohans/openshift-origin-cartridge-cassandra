@@ -2,9 +2,40 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
-# Generate username, password, and db name and create env variables
-#echo 'Generating username and password'
+case "$1" in
+  -v|--version)
+    version="$2"
+esac
 
-#username=$(generate_username)
-#password=$(generate_password)
+echo "$version" > "$OPENSHIFT_CASSANDRA_DIR/env/OPENSHIFT_CASSANDRA_VERSION"
 
+
+#####################
+# Generating username and password
+# Distribute the information in environment variables
+# and prepare console output message
+#####################
+echo 'Generating username and password'
+
+username=$(generate_username)
+password=$(generate_password)
+
+echo "$username" > $OPENSHIFT_CASSANDRA_DIR/env/OPENSHIFT_CASSANDRA_DB_USERNAME
+echo "$password" > $OPENSHIFT_CASSANDRA_DIR/env/OPENSHIFT_CASSANDRA_DB_PASSWORD
+echo "jdbc:cassandra://$username:$password@$OPENSHIFT_CASSANDRA_DB_HOST:$OPENSHIFT_CASSANDRA_DB_PORT/" > $OPENSHIFT_CASSANDRA_DIR/env/OPENSHIFT_CASSANDRA_DB_URL
+
+client_result ""
+client_result "Cassandra ${version} database added.  Please make note of these credentials:"
+client_result ""
+client_result "       Username: $username"
+client_result "       Password: $password"
+client_result "  Database Name: $OPENSHIFT_APP_NAME"
+client_result ""
+
+client_result 'Connection URL: jdbc:cassandra://$OPENSHIFT_CASSANDRA_DB_HOST:$OPENSHIFT_CASSANDRA_DB_PORT/'
+client_result ""
+
+cart_props 'connection_url=jdbc:cassandra://$OPENSHIFT_CASSANDRA_DB_HOST:$OPENSHIFT_CASSANDRA_DB_PORT/'
+cart_props "username=$username"
+cart_props "password=$password"
+cart_props "database_name=$OPENSHIFT_APP_NAME"

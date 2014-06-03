@@ -3,18 +3,18 @@ Cartridge-Short-Name: CASSANDRA
 Architecture: noarch
 Display-Name: Cassandra Database 1.2.5
 Description: "Cassandra is a multi-user, multi-threaded NoSQL database server."
-Version: '1.2.5'
-Versions: [1.2.5]
+Version: '2.0.8'
+Versions: ['1.2.5', '2.0.8']
 Cartridge-Version: 0.0.1
-Cartridge-Vendor: rc
+Cartridge-Vendor: Juergen Hoffmann
 License: GPL
-Vendor: Oracle
+Vendor: Juergen HB+offmann
 Categories:
   - service
   - database
   - embedded
 Website: http://cassandra.apache.org
-Source-Url: https://github.com/rajatchopra/openshift-origin-cartridge-cassandra.git
+Source-Url: https://github.com/juhoffma/openshift-origin-cartridge-cassandra.git
 Help-Topics:
   - "Building with Cassandra" : http://docs.redhat.com/docs/en-US/OpenShift/2.0/html/User_Guide/sect-User_Guide-Working_With_Database_Cartridges.html
 Cart-Data:
@@ -31,7 +31,6 @@ Cart-Data:
     Type: cart_data
     Description: "Cassandra DB connection URL"
 Provides:
-  - cassandra-1.2.5
   - cassandra 
   - cassandra-singleton-master
 Publishes:

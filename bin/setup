@@ -1,3 +1,8 @@
 #!/bin/bash -e
 
-mkdir -p $OPENSHIFT_CASSANDRA_DIR/cassandra/{log,pid,saved_caches,data,commitlog,pid}
+case "$1" in
+  -v|--version)
+    version="$2"
+esac
+
+mkdir -p $OPENSHIFT_CASSANDRA_DIR/{log,pid,saved_caches,data,commitlog,pid}
