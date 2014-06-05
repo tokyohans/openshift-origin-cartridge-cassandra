@@ -9,6 +9,26 @@ esac
 
 echo "$version" > "$OPENSHIFT_CASSANDRA_DIR/env/OPENSHIFT_CASSANDRA_VERSION"
 
+#####################
+# Copy the Cassandra conf Directory and cassandra.in.sh 
+# of each version to the cartridge conf directory
+#####################
+
+cp -ar ${OPENSHIFT_CASSANDRA_DIR}usr/versions/${version}/conf/* ${OPENSHIFT_CASSANDRA_DIR}/conf
+cp -a ${OPENSHIFT_CASSANDRA_DIR}usr/versions/${version}/bin/cassandra.in.sh ${OPENSHIFT_CASSANDRA_DIR}/conf
+
+sed -ig 's,/var/lib/cassandra,'${OPENSHIFT_HOMEDIR}'/app-root/data/cassandra-data,' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml
+sed -ig 's/127.0.0.1/'${OPENSHIFT_CASSANDRA_DB_HOST}'/g' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml
+sed -ig 's/localhost/'${OPENSHIFT_CASSANDRA_DB_HOST}'/g' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml 
+sed -ig 's,7000,17000,' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml  
+sed -ig 's,7001,17001,' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml
+sed -ig 's,9160,19160,' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml
+sed -ig 's/localhost/'${OPENSHIFT_CASSANDRA_DB_HOST}'/g' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml 
+sed -ig 's,/var/log/cassandra,'${OPENSHIFT_CASSANDRA_DIR}'/log,' ${OPENSHIFT_CASSANDRA_DIR}/conf/log4j-server.properties
+sed -ig 's,${max_sensible_yg_in_mb}M,256M,' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra-env.sh
+sed -ig 's,${desired_yg_in_mb}M,256M,' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra-env.sh
+sed -ig '/jmxremote/s/^/#/' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra-env.sh
+
 
 #####################
 # Generating username and password
