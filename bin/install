@@ -22,7 +22,7 @@ sed -ig 's/127.0.0.1/'${OPENSHIFT_CASSANDRA_DB_HOST}'/g' ${OPENSHIFT_CASSANDRA_D
 sed -ig 's/localhost/'${OPENSHIFT_CASSANDRA_DB_HOST}'/g' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml 
 sed -ig 's,7000,17000,' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml  
 sed -ig 's,7001,17001,' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml
-sed -ig 's,9160,19160,' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml
+sed -ig 's,9160,'${OPENSHIFT_CASSANDRA_DB_PORT}',' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml
 sed -ig 's/localhost/'${OPENSHIFT_CASSANDRA_DB_HOST}'/g' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra.yaml 
 sed -ig 's,/var/log/cassandra,'${OPENSHIFT_CASSANDRA_DIR}'/log,' ${OPENSHIFT_CASSANDRA_DIR}/conf/log4j-server.properties
 sed -ig 's,${max_sensible_yg_in_mb}M,256M,' ${OPENSHIFT_CASSANDRA_DIR}/conf/cassandra-env.sh
