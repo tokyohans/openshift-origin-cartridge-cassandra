@@ -2,9 +2,35 @@
 
 The `cassandra` cartridge provides [Cassandra](http://cassandra.apache.org/) on OpenShift.
 
-The downloadable URL is : https://raw.github.com/rajatchopra/openshift-origin-cartridge-cassandra/master/metadata/manifest.yml
+## Versions
 
-Simply use with 'rhc' client tools - rhc cartridge add https://raw.github.com/rajatchopra/openshift-origin-cartridge-cassandra/master/metadata/manifest.yml --app <existing_app_name>
+This cartridge is able to support multiple versions of cassandra. The Cartridge comes with cassandra 1.2.4 and 2.0.8
+out of the box, and you can easily add new versions to the cartridge by adding them to usr/versions and metadata/manifest.yml
+accordingly. 
+
+## Downloadable Cartridge
+
+The cartridge is growing in size, and since there is a restriction on downloadable cartridges to be downloaded within 10s it depends on your internet connection whether the download will finish successfully, or whether you have to install the cartridge manually. The downloadable URL is : https://raw.github.com/juhoffma/openshift-origin-cartridge-cassandra/master/metadata/manifest.yml
+
+Simply use with 'rhc' client tools - rhc cartridge add https://raw.github.com/juhoffma/openshift-origin-cartridge-cassandra/master/metadata/manifest.yml --app <existing_app_name>
+
+## Manual Installation
+
+Simply download the zipfile of the repository and put it into '/usr/libexec/openshift/cartridges/openshift-origin-cartridge-cassandra' and run the following command on the node(s)
+
+```
+oo-admin-cartridge --action install --source /usr/libexec/openshift/cartridges/openshift-origin-cartridge-cassandra/
+```
+
+then on the broker run:
+
+```
+# oo-admin-ctl-cartridge --activate -c import-node --obsolete
+# oo-admin-broker-cache --clear
+# oo-admin-console-cache --clear
+```
+
+that will make the cartridge available for deployment.
 
 ## Environment Variables
 
@@ -13,7 +39,8 @@ of use:
 
     OPENSHIFT_CASSANDRA_HOST      The Cassandra IP address
     OPENSHIFT_CASSANDRA_PORT      The Cassandra port
-    OPENSHIFT_CASSANDRA_LOG_DIR     The path to the Cassandra log directory
+    OPENSHIFT_CASSANDRA_LOG_DIR   The path to the Cassandra log directory
 
 For more information about environment variables, consult the
 [OpenShift Application Author Guide](https://github.com/openshift/origin-server/blob/master/node/README.writing_applications.md).
+
