@@ -5,5 +5,13 @@ case "$1" in
     version="$2"
 esac
 
-mkdir -p $OPENSHIFT_CASSANDRA_DIR/{log,pid,saved_caches,data,commitlog,pid}
+mkdir -p $OPENSHIFT_CASSANDRA_DIR/{log,pid}
+
+#####################
+# Copy the Cassandra conf Directory and cassandra.in.sh
+# of each version to the cartridge conf directory
+#####################
+
+cp -ar ${OPENSHIFT_CASSANDRA_DIR}usr/versions/${version}/conf/* ${OPENSHIFT_CASSANDRA_DIR}/conf
+cp -a ${OPENSHIFT_CASSANDRA_DIR}usr/versions/${version}/bin/cassandra.in.sh ${OPENSHIFT_CASSANDRA_DIR}/conf
 
