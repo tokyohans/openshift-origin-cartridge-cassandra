@@ -4,7 +4,7 @@ The `cassandra` cartridge provides [Cassandra](http://cassandra.apache.org/) on 
 
 ## Versions
 
-This cartridge is able to support multiple versions of cassandra. The Cartridge comes with cassandra 1.2.4 and 2.0.8
+This cartridge supports cassandra version 2.2.6. The Cartridge comes with cassandra 2.2.6 
 out of the box, and you can easily add new versions to the cartridge by adding them to usr/versions and metadata/manifest.yml
 accordingly. 
 

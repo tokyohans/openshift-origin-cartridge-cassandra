@@ -1,25 +1,26 @@
 Name: cassandra
 Cartridge-Short-Name: CASSANDRA
 Architecture: noarch
-Display-Name: Cassandra Database 2.0.8
+Display-Name: Cassandra Database 2.2.6.
 Description: "The Apache Cassandra database is the right choice when you need scalability and high availability without compromising performance. Linear scalability and proven fault-tolerance on commodity hardware or cloud infrastructure make it the perfect platform for mission-critical data. Cassandra's support for replicating across multiple datacenters is best-in-class, providing lower latency for your users and the peace of mind of knowing that you can survive regional outages."
-Version: '2.0.8'
+Version: '2.2.6'
 Versions:
-- '1.2.4'
 - '2.0.8'
-Cartridge-Version: 0.0.3
+- '2.2.6'
+Cartridge-Version: 0.0.4
 Compatible-Versions:
 - 0.0.1
 - 0.0.2
-Cartridge-Vendor: hoffmann
+- 0.0.3
+Cartridge-Vendor: tokyohans 
 License: GPL
-Vendor: Juergen Hoffmann
+Vendor: Hans Raj Verma 
 Categories:
   - service
   - database
   - embedded
 Website: http://cassandra.apache.org
-Source-Url: https://github.com/juhoffma/openshift-origin-cartridge-cassandra.git
+Source-Url: https://github.com/tokyohans/openshift-origin-cartridge-cassandra.git
 Help-Topics:
   - "Building with Cassandra" : http://docs.redhat.com/docs/en-US/OpenShift/2.0/html/User_Guide/sect-User_Guide-Working_With_Database_Cartridges.html
 Cart-Data:
@@ -36,7 +37,7 @@ Cart-Data:
     Type: cart_data
     Description: "Cassandra DB connection URL"
 Provides:
-  - cassandra-2.0.8
+  - cassandra-2.2.6
   - cassandra 
 Publishes:
   publish-db-connection-info:
@@ -51,8 +52,8 @@ Endpoints:
     Public-Port-Name:  DB_PROXY_PORT
 Install-Build-Required: false
 Version-Overrides:
-  '1.2.4':
-    Display-Name: Cassandra Database 1.2.4
+  '2.0.8':
+    Display-Name: Cassandra Database 2.0.8 
     Provides:
-    - cassandra-1.2.4
+    - cassandra-2.0.8
     - cassandra
