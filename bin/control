@@ -7,6 +7,18 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 export STOPTIMEOUT=10
 
+# change the default memory calculation to work on gear limits
+max_memory_bytes=`oo-cgroup-read memory.limit_in_bytes`
+max_memory_mb=`expr $max_memory_bytes / 1048576`
+CASSANDRA_JVM_HEAP_RATIO=0.5
+CASSANDRA_JVM_HEAP_NEWSIZE=0.25
+max_heap_size_in_mb=$( echo "$max_memory_mb * $CASSANDRA_JVM_HEAP_RATIO" | bc | awk '{print int($1+0.5)}')
+heap_newsize_in_mb=$( echo "$max_memory_mb * $CASSANDRA_JVM_HEAP_NEWSIZE" | bc | awk '{print int($1+0.5)}')
+MAX_HEAP_SIZE="${max_heap_size_in_mb}M"
+HEAP_NEWSIZE="${heap_newsize_in_mb}M"
+export MAX_HEAP_SIZE
+export HEAP_NEWSIZE
+
 function is_running {
   pidfile=$OPENSHIFT_CASSANDRA_DIR/pid/cassandra.pid
 
